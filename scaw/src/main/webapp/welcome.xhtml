@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>SCAW - Presentación de JSF</title>
+	<link rel="stylesheet" type="text/css" href="css/table-style.css" />
+</h:head>
+
+<h:body>
+
+	<h2>Bienvenido!</h2>
+	<h:form>
+		<h:outputLabel value="#{personBean.firstName}" />
+		<br />
+		<br />
+		<h:outputLabel value="#{personBean.lastName}" />
+		<br />
+		<br />
+		<h:outputLabel value="#{personBean.email}" />
+		<br />
+		<br />
+		<h:commandButton value="Back" action="index" >
+	        <f:ajax render="@form" />
+		</h:commandButton>
+	</h:form>
+
+	<br />
+	<br />
+	<h:form>
+		<h:dataTable value="#{personBean.findAll()}" var="person"
+			styleClass="order-table" headerClass="order-table-header"
+			rowClasses="order-table-odd-row,order-table-even-row">
+			
+			<h:column>
+				<f:facet name="header">Nombre</f:facet>    				
+	      		#{person.firstName}
+	  		 </h:column>
+	
+			<h:column>
+				<f:facet name="header">Apellido</f:facet>
+	      		#{person.lastName}
+	   		</h:column>
+	
+			<h:column>
+				<f:facet name="header">Email</f:facet>
+	    	  	#{person.email}
+		   </h:column>
+		   <h:column>
+		   		<f:facet name="header">Editar</f:facet>
+		   		<h:commandLink value="Editar" action="#{taskBean.createTask(person.id)}"/>
+		   		<!-- createTask() REDIRECCIONA AL FORMULARIO PARA CREAR LA TAREA -->
+		   </h:column>
+		   <h:column>
+		   		<f:facet name="header">Eliminar</f:facet>
+		   		<h:commandLink value="Eliminar" action="#{taskBean.addTask(person.id)}"/>
+		   		<!-- CREA DIRECTAMENTE LA TAREA YA QUE NO SE REQUIERE UN FORMULARIO PARA ELIMINAR UN REGISTRO -->		   		
+		   </h:column>		   	
+		</h:dataTable>
+		<br/>
+		<h:commandButton value="Nuevo registro" action="#{taskBean.createTask(person.id)}">		   
+		</h:commandButton>		
+		<a href="tareas.xhtml">VER TAREAS</a>
+	</h:form>
+</h:body>
+</html>

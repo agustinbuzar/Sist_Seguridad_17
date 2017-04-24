@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+
+<h:head>
+	<title>SCAW - Presentacióin de JSF</title>
+</h:head>
+
+<h:body>
+	<h3>Tareas</h3>
+	<div class="panel-body">
+		<h:form>
+			<h:dataTable value="#{taskBean.listAll()}" var="task">
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					#{task.id}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Acción</f:facet>
+					#{task.mode}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nombre</f:facet>
+					#{task.firstname_to_add}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Apellido</f:facet>
+					#{task.lastname_to_add}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Email</f:facet>
+					<f:facet name="campo">#{task.email_to_add}</f:facet>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Estado</f:facet>
+					#{task.state}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Aprobar</f:facet>
+					<h:commandButton value="Aprobado" action="#{taskBean.aproveTask(task)}"></h:commandButton>
+					<f:param name="task" value="#{task}"/>
+				</h:column>			
+			</h:dataTable>			
+		</h:form>
+	</div>
+	<a href="welcome.xhtml">VER PERSONAS</a>
+	
+</h:body>
+</html>
